@@ -1,12 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage, Link } from '@inertiajs/vue3';
 
 
 const { jobs } = usePage().props;
 </script>
 
-<template>
+<template #header>
     <Head title="All Jobs" />
 
     <AuthenticatedLayout>
@@ -45,7 +45,7 @@ const { jobs } = usePage().props;
 
 
                             <template v-if="jobs.data.length">
-                                <tr v-for="job in jobs.data" :key="job.id"
+                                <tr v-for="job in jobs.data"
                                     class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                                     <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                                         scope="row">
@@ -66,8 +66,8 @@ const { jobs } = usePage().props;
                                             class="me-2 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">{{ job.salary }}</span>
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                            :href="route('admin.jobs.edit', job.id)">Edit</a>
+                                        <Link class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                            :href="route('admin.jobs.edit', job.id)">Edit</Link>
                                     </td>
                                 </tr>
                             </template>

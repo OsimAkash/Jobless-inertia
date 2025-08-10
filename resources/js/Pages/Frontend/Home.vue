@@ -39,7 +39,7 @@
                             vast network of opportunities across industries.
                         </p>
 
-                        <form class="mt-10" action="" method="GET">
+                        <form @submit.prevent="filter"  class="mt-10" >
                             <div class="relative w-full">
                                 <svg class="absolute left-4 top-5 hidden text-white sm:block md:left-8 md:top-7"
                                     width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -50,7 +50,7 @@
                                 </svg>
                                 <input
                                     class="h-[60px] w-full rounded-xl bg-white/5 pl-4 pr-28 text-white outline-none ring-1 ring-inset ring-white/10 sm:pl-12 md:h-[72px] md:pl-20"
-                                    type="search" name="search" value="{{ request('search', '') }}"
+                                    type="search" name="search" v-model="form.search"
                                     placeholder="e.g. FullStack Laravel & VueJS Developer" />
 
                                 <button
@@ -176,8 +176,14 @@
 
 <script setup>
 import FrontendLayout from "@/Layouts/FrontendLayout.vue";
-import { usePage, Link } from "@inertiajs/vue3";
+import { usePage, Link, useForm } from "@inertiajs/vue3";
 
 
 const { jobs, job_count } = usePage().props;
+
+const form = useForm({
+    search: '',
+});
+
+const filter = () => form.get('/');
 </script>

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\EmploymentType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
 use App\Http\Resources\Admin\JobResource;
+use App\Http\Resources\EmploymentTypeResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class JobController extends Controller
 {
@@ -17,7 +20,7 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::latest()->paginate();
-        return inertia()->render('Admin/Jobs/Index', ['jobs'=> JobResource::collection($jobs)]);
+        return inertia()->render('Admin/Jobs/Index', ['jobs' => JobResource::collection($jobs)]);
     }
 
     /**
@@ -25,7 +28,10 @@ class JobController extends Controller
      */
     public function create()
     {
-        return inertia()->render('Admin/Jobs/Create');
+        return inertia()->render('Admin/Jobs/Create',
+        [
+            'employmentTypes' => EmploymentTypeResource::collection(EmploymentType::cases())
+        ]);
     }
 
     /**
@@ -43,7 +49,9 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        return inertia()->render('Admin/Jobs/Show', ['job' => new JobResource($job)]);
+        return Inertia::render('Admin/Jobs/Show', [
+            'job' => new JobResource($job),
+        ]);
     }
 
     /**
@@ -51,7 +59,10 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        return inertia()->render('Admin/Jobs/Edit', ['job' => new JobResource($job)]);
+        return inertia()->render('Admin/Jobs/Edit', [
+            'employmentTypes' => EmploymentTypeResource::collection(EmploymentType::cases()),
+            'job' => new JobResource($job),
+        ]);
     }
 
     /**

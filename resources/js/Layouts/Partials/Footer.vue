@@ -47,16 +47,15 @@
         <!-- /Social Media Icons -->
 
         <p class="mt-10 text-center text-xs leading-5 text-gray-500">
-            &copy; {{ current_year }} {{ config( app_name ) }}, Inc. All rights reserved.
+            &copy; {{ current_year }} {{ app_name }}, Inc. All rights reserved.
         </p>
     </div>
 </footer>
 <!-- /Footer -->
 </template>
 
-
 <script setup>
 import { usePage } from '@inertiajs/vue3';
 
-const {current_year, app_name} = usePage().props;
+const { current_year, app_name } = usePage().props;
 </script>
