@@ -12,6 +12,10 @@ Route::get('/jobs/{job}', JobDetailsController::class)->name('frontend.job_detai
 
 
 // Admin Dashboard Routes
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.dashboard');
+})->middleware('auth')->name('dashboard');
+
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('dashboard', DashboardController::class)->name('admin.dashboard');
     Route::resource('jobs', JobController::class, ['as' => 'admin']);

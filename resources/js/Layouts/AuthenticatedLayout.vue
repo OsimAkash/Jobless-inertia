@@ -39,7 +39,26 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
-                            </div>
+
+                                <NavLink
+                                    :href="route('admin.jobs.index')"
+                                    :active="route().current('admin.jobs.index')"
+                                >
+                                    Jobs
+                                </NavLink>
+
+                                <NavLink
+                                    :href="route('admin.jobs.create')"
+                                    :active="route().current('admin.jobs.create')"
+                                >
+                                    Create a Job
+                                </NavLink>
+
+
+
+
+
+                            </div> 
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
@@ -71,6 +90,7 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
+
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -141,6 +161,20 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        
+                        <ResponsiveNavLink
+                            :href="route('admin.jobs.index')"
+                            :active="route().current('admin.jobs.index')"
+                        >
+                            Jobs
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('admin.jobs.create')"
+                            :active="route().current('admin.jobs.create')"
+                        >
+                            Create a Job
+                        </ResponsiveNavLink>
+
                     </div>
 
                     <!-- Responsive Settings Options -->

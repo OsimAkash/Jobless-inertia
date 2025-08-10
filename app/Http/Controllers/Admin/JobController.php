@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
+use App\Http\Resources\Admin\JobResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::latest()->get();
-        return inertia()->render('Admin/Jobs/Index');
+        $jobs = Job::latest()->paginate();
+        return inertia()->render('Admin/Jobs/Index', ['jobs'=> JobResource::collection($jobs)]);
     }
 
     /**
@@ -34,7 +35,7 @@ class JobController extends Controller
     {
         Job::create($request->validated());
 
-        return inertia()->render('Admin/Jobs/Index');
+        return to_route('admin.jobs.index');
     }
 
     /**
@@ -42,7 +43,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        return inertia()->render('Admin/Jobs/Show');
+        return inertia()->render('Admin/Jobs/Show', ['job' => new JobResource($job)]);
     }
 
     /**
@@ -50,7 +51,7 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        return inertia()->render('Admin/Jobs/Edit');
+        return inertia()->render('Admin/Jobs/Edit', ['job' => new JobResource($job)]);
     }
 
     /**
