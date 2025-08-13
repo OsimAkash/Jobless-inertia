@@ -18,4 +18,4 @@ body{
     @apply flex min-h-screen flex-col bg-gray-900;
 }
 
-</style>
+</style>   
